@@ -18,8 +18,8 @@ const { items,totalAmount } = useContext(CartContext);
             </div>
             <div>
                 {items.map((item,index)=>(
-                    <CartItem item ={item} key={index}></CartItem>
-                ))}
+                    <CartItem item ={item} key={index} ></CartItem>
+                    ))}
             </div>
             <div className="cart-total">
                 <span>
