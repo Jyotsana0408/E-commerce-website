@@ -1,7 +1,11 @@
 import './cart.css'
 import CartItem from'./cartitem'
+import { useContext } from "react";
+import CartContext from "../../Store/CartContext"
 
 const Cart =({onCartShow})=>{
+
+const { items,totalAmount } = useContext(CartContext);
 
     return(
         <section id="cart" className="container" >
@@ -13,18 +17,19 @@ const Cart =({onCartShow})=>{
                 <span className="cart-quantity">QUANTITY</span>
             </div>
             <div>
-                <CartItem></CartItem>
+                {items.map((item,index)=>(
+                    <CartItem item ={item} key={index}></CartItem>
+                ))}
             </div>
             <div className="cart-total">
                 <span>
                     <span className="total-title"> Total
                         </span>
-                    <span className="total-value">$0</span>
+                    <span className="total-value">${totalAmount}</span>
                 </span>
             </div>
             <button className="purchase-btn" type="button">PURCHASE</button>
         </section>
     )
 }
-
 export default Cart;

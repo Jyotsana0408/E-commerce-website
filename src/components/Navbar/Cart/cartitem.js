@@ -1,18 +1,26 @@
 import './cartitem.css'
+import { useContext } from "react";
+import CartContext from "../../Store/CartContext"
 
-const cartitem =()=>{
-    const cart = [
-        {
-          title: 'Colors',
-          price: 100,
-          imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-        }]
+const CartItem =({item})=>{
+const { addItem,removeItem } = useContext(CartContext);
+
+const addCartItem = () => {
+    // const newItem ={...product,amount:parseInt(1),id:Math.random()}
+    // addItem(newItem)
+  };
+
+const removeCartItem =()=>{
+    removeItem(item)
+
+}
+
+        console.log(item)
      return(
         <div >
-                {cart.map((item) => (
                 <div className="cart-items" key={item.id}>
                     <div className="cart-item-name" >
-                    <img src='https://prasadyash2411.github.io/ecom-website/img/Album%201.png' alt=''></img>
+                    <img src={item.imageUrl} alt=''></img>
                     <span className='title'>{item.title}</span>
                     </div>
                     <div  className="cart-items-price">
@@ -20,13 +28,11 @@ const cartitem =()=>{
                     </div>
                 <div className="cart-items-quantity"> 
                 <input type='number' value='1'></input>
-                <button onClick={()=>{}}>Remove</button>
+                <button onClick={removeCartItem}>Remove</button>
                 </div>
                 </div>
-            ))}
-
             </div>
      )
 }
 
-export default cartitem;
+export default CartItem;
