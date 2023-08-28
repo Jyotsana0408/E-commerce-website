@@ -1,9 +1,9 @@
 import React, { useReducer} from "react";
 import CartContext from "./CartContext";
 
-
 const initialState={
     items:[],
+    selectedItem:[],
     totalAmount:0
 }
 const reducer=(state,action)=>{
@@ -11,13 +11,11 @@ const reducer=(state,action)=>{
     if (action.type==='ADD'){
          console.log(action)
         state.totalAmount=state.totalAmount + parseInt(action.value.price)*parseInt(action.value.amount);
-
         const itemExistidx=state.items.findIndex((val)=>val.id===action.value.id)
-
-
+        
         const itemExist = state.items[itemExistidx];
-
-
+         
+         
         if (itemExist){
             let updateItem={
                 ...itemExist, amount:parseInt(itemExist.amount)+parseInt(action.value.amount)
@@ -29,15 +27,13 @@ const reducer=(state,action)=>{
             updateItems=[...state.items,action.value]
         }
     }
-
     if (action.type==='REMOVE'){
        state.totalAmount=state.totalAmount - action.value.price;
-
-
+  
         console.log(action.value,state.totalAmount)
         if (action.value.amount >1){
             const itemindex=state.items.findIndex((val)=>val.id===action.value.id)
-
+        
         console.log(itemindex)
         const itemRemove = state.items[itemindex];
             let updateItem={
@@ -54,38 +50,43 @@ const reducer=(state,action)=>{
 
     }
 
+    if (action.type==='DETAILS'){
+        state.selectedItem=[action.value]
+    }
+
     return {
 
         items:updateItems,
-        totalAmount:state.totalAmount
+        totalAmount:state.totalAmount,
+        selectedItem:state.selectedItem
 
     }
 
 }
-
 const CartProvider=(props)=>{
     const [cartState, dispatchItems]=useReducer(reducer,initialState)
-
     const addItemsHandler = (item)=>{
         dispatchItems({type:'ADD',value:item})
     }
     const removeItemsHandler = (item)=>{
         dispatchItems({type:'REMOVE',value:item})
     }
+    const selectedItemHandler=(item)=>{
+        dispatchItems({type:'DETAILS',value:item})
+    }
 
     const cartContext = {
         items: cartState.items,
         totalAmount: cartState.totalAmount,
+        selectedItem:cartState.selectedItem,
+        selectedItemHandler:selectedItemHandler,
         addItem: addItemsHandler,
         removeItem: removeItemsHandler,
       };
-
     return(
         <CartContext.Provider value={cartContext}>
             {props.children}
         </CartContext.Provider>
     )
-
 }
-
 export default CartProvider;
