@@ -1,5 +1,6 @@
 export const RoutePath={
     Home:'/',
     Store:'/store',
-    About:'/about'
+    About:'/about',
+    CantactUs:'/cantactus'
 }

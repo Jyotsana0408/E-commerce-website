@@ -4,8 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Footer from './components/layout/Footer';
 import CartProvider from './components/Store/CartProvider'
 import Routers from './components/Routers/Routers';
-
-
 function App() {
   return (
     <Router>
@@ -16,6 +14,5 @@ function App() {
      </CartProvider>
     </Router>
   );
-  }
-
-  export default App;
+}
+export default App;
