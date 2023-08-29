@@ -1,12 +1,21 @@
 import './cart.css'
 import CartItem from'./cartitem'
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CartContext from "../../Store/CartContext"
 
 const Cart =({onCartShow})=>{
 
-const { items,totalAmount } = useContext(CartContext);
+const { items,totalAmount,fetchData,emptyCart } = useContext(CartContext);
 
+useEffect(()=>{
+    fetchData()
+},[items])
+
+
+const purchaseHandler=()=>{
+    alert("Order Placed Successfully")
+    emptyCart()
+}
     return(
         <section id="cart" className="container" >
             <h2>CART</h2>
@@ -19,7 +28,7 @@ const { items,totalAmount } = useContext(CartContext);
             <div>
                 {items.map((item,index)=>(
                     <CartItem item ={item} key={index} ></CartItem>
-                    ))}
+                ))}
             </div>
             <div className="cart-total">
                 <span>
@@ -28,7 +37,7 @@ const { items,totalAmount } = useContext(CartContext);
                     <span className="total-value">${totalAmount}</span>
                 </span>
             </div>
-            <button className="purchase-btn" type="button">PURCHASE</button>
+            <button className="purchase-btn" type="button" onClick={purchaseHandler}>PURCHASE</button>
         </section>
     )
 }

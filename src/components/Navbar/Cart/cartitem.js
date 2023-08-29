@@ -1,17 +1,17 @@
 import './cartitem.css'
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import CartContext from "../../Store/CartContext"
+
 const CartItem =({item})=>{
-const { addItem,removeItem } = useContext(CartContext);
-const addCartItem = () => {
-    // const newItem ={...product,amount:parseInt(1),id:Math.random()}
-    // addItem(newItem)
-  };
+const { removeItem } = useContext(CartContext);
+const qty = useRef()
+
+
 const removeCartItem =()=>{
     removeItem(item)
+
 }
 
-        console.log(item)
      return(
         <div key={item.id}>
                 <div className="cart-items" >
@@ -23,11 +23,11 @@ const removeCartItem =()=>{
                     {item.price}
                 </div>
                 <div className="cart-items-quantity"> 
-                <input type='number' value='1'></input>
+                <input type='number' ref={qty} defaultValue={item.amount>1 ?item.amount : "1"} ></input>
                 <button onClick={removeCartItem}>Remove</button>
                 </div>
                 </div>
             </div>
      )
 }
-export default CartItem;
+export default CartItem

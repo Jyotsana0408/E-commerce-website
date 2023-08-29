@@ -33,13 +33,12 @@ const Productlist = () => {
       <h1>Products</h1>
       <div className="product-list">
         {productsArr.map((product, index) => (
-          <div key={index}>
-            <Products product={product} ></Products>
+          <div>
+            <Products  key={index} product={product}  ></Products>
           </div>
         ))}
         </div>
       </div>
   );
 };
-
 export default Productlist;

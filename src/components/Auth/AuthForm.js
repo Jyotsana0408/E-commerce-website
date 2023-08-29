@@ -2,13 +2,19 @@ import { useState, useRef, useContext } from 'react';
 import AuthContext from '../Store/AuthContext'
 import classes from './AuthForm.module.css';
 import { useNavigate } from 'react-router-dom';
+
+
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const navigate = useNavigate()
+
   const authCtx = useContext(AuthContext);
+
+
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
@@ -20,10 +26,10 @@ const AuthForm = () => {
     let url;
     if (isLogin) {
       url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBS8czfYR6fVHclpZF1rBED6NjtXlKSz2I';
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD61trb_TQ27ZLrT4ybyyFKWkht-DaUa0o';
     } else {
       url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBS8czfYR6fVHclpZF1rBED6NjtXlKSz2I';
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD61trb_TQ27ZLrT4ybyyFKWkht-DaUa0o';
     }
     fetch(url, {
       method: 'POST',
@@ -49,7 +55,10 @@ const AuthForm = () => {
       })
       .then((data) => {
         authCtx.login(data.idToken);
+        localStorage.setItem('email',enteredEmail)
         navigate('/store')
+
+
       })
       .catch((err) => {
         alert(err.message);
