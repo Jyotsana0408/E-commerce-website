@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './ContactUs.css'
+
+import './CantactUs.css'
+
 const ContactUs = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [formError, setFormError] = useState('');
-
+  
   async function addCantactUsHandler(contact) {
     const response = await fetch('https://react-http-76e5c-default-rtdb.firebaseio.com/contactus.json', {
       method: 'POST',
@@ -17,12 +19,15 @@ const ContactUs = () => {
     const data = await response.json();
     console.log(data);
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!isFormValid()) {
       setFormError('* Please fill in all fields.');
       return;
     }
+
     const contact={
         Name:name,
         Email:email,
@@ -36,9 +41,11 @@ const ContactUs = () => {
     isFormValid=false;
     
   };
+
   let isFormValid = () => {
     return name.trim() !== '' && email.trim() !== '' && phoneNumber.trim() !== '';
   };
+
   return (
     <div>
     <h2 className='cantact'>Contact Us</h2>
@@ -72,4 +79,5 @@ const ContactUs = () => {
     </div>
   );
 };
+
 export default ContactUs;
