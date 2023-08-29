@@ -1,8 +1,6 @@
 import React from "react";
 import "./productlist.css";
-
 import Products from "./product";
-
 const Productlist = () => {
   const productsArr = [
     {
@@ -30,8 +28,6 @@ const Productlist = () => {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ];
-
-
   return (
     <div className="container">
       <h1>Products</h1>
@@ -47,4 +43,3 @@ const Productlist = () => {
 };
 
 export default Productlist;
-

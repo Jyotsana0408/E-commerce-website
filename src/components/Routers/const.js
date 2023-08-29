@@ -1,8 +1,15 @@
 export const RoutePath={
-    Home:'/',
+
+    Home:'/home',
+
     Store:'/store',
+
     About:'/about',
-    ContactUs:'/contactus',
-    ProductPage:'/store/:product'
+
+    CantactUs:'/cantactus',
+
+    ProductPage:'/store/:product',
+
+    Login:'/login'
 
 }
